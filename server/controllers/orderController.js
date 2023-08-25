@@ -117,7 +117,6 @@ export const deleteOrder = async (req, res, next) => {
   }
 };
 
-
 export const completeOrder = async (req, res, next) => {
   try {
     const { code, transactionId } = req.body;
@@ -157,11 +156,10 @@ export const makePayment = async (req, res, next) => {
       merchantTransactionId: orderCreated._id.toString(),
       merchantUserId: "MUID123",
       amount: req.body.amount * 100,
-      redirectUrl: "http://localhost:3000/api/order/completeOrder",
+      redirectUrl: `${process.env.REDIRECT_DOMAIN}/api/order/completeOrder`,
       redirectMode: "POST",
-      callbackUrl: "http://localhost:3000/api/order",
+      callbackUrl: `${process.env.REDIRECT_DOMAIN}/api/order`,
       mobileNumber: 9999999999,
-
       paymentInstrument: {
         type: "PAY_PAGE",
       },
